@@ -47,10 +47,11 @@ class _BaseProbaForecastingErrorMetric(BaseForecastingErrorMetric):
         "lower_is_better": True,
     }
 
-    def __init__(self, multioutput="uniform_average", score_average=True):
+    def __init__(self, multioutput="uniform_average", score_average=True, sample_weight=None):
         self.multioutput = multioutput
         self.score_average = score_average
-        super().__init__(multioutput=multioutput)
+        self.sample_weight = sample_weight
+        super().__init__(multioutput=multioutput, sample_weight=sample_weight)
 
     def __call__(self, y_true, y_pred, **kwargs):
         """Calculate metric value using underlying metric function.
