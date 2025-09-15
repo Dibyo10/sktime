@@ -83,6 +83,15 @@ class MedianSquaredPercentageError(BaseForecastingErrorMetricFunc):
         * If ``True``, direct call to the metric object evaluates the metric at each
           time point, equivalent to a call of the ``evaluate_by_index`` method.
 
+    sample_weight : optional, 1D array-like or callable, default=None
+        Sample weights for each time point.
+
+        * If ``None``, all samples are weighted equally.
+        * If array-like, must be 1D and the same length as ``y_true``.
+        * If callable, must follow the SampleWeightGenerator protocol.
+        The callable should return a 1D array of weights based on ``y_true`` (and optionally ``y_pred``).
+        Used to weight the error calculation for each time point.
+
     See Also
     --------
     MeanAbsolutePercentageError
