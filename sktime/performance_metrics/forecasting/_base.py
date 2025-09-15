@@ -111,6 +111,7 @@ class BaseForecastingErrorMetric(BaseMetric):
         multioutput="uniform_average",
         multilevel="uniform_average",
         by_index=False,
+        sample_weight=None,
     ):
         self.multioutput = multioutput
         self.multilevel = multilevel
@@ -200,6 +201,8 @@ class BaseForecastingErrorMetric(BaseMetric):
               of shape ``(n_levels, y_true.columns)`` if ``multioutput="raw_values"``.
               metric is applied per level, row averaging (yes/no) as in ``multioutput``.
         """  # noqa: E501
+        if self.sample_weight is not None:
+            kwargs["sample_weight"]=self.sample_weight
         if self.by_index:
             return self.evaluate_by_index(y_true, y_pred, **kwargs)
         return self.evaluate(y_true, y_pred, **kwargs)
