@@ -38,6 +38,16 @@ class _BaseProbaForecastingErrorMetric(BaseForecastingErrorMetric):
 
         * if ``True``, metric/loss is averaged by upper/lower and/or quantile
         * if ``False``, metric/loss is not averaged by upper/lower and/or quantile
+
+        
+    sample_weight : optional, 1D array-like or callable, default=None
+       Sample weights for each time point.
+
+       * If ``None``, all samples are weighted equally.
+       * If array-like, must be 1D and the same length as ``y_true``.
+       * If callable, must follow the SampleWeightGenerator protocol.
+       The callable should return a 1D array of weights based on ``y_true`` (and optionally ``y_pred``).
+       Used to weight the error calculation for each time point.
     """
 
     _tags = {
